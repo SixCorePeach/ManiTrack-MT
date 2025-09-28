@@ -5,11 +5,10 @@
 
 1、 trackingnet：https://zhuanlan.zhihu.com/p/673825440
 在下载完后，还需要将这些大的资源包进行组合和解压，是一个大工程，光下载就得两三天。
-然后组装需要每一个都进行，而且不能出错。怪不得大佬说，good luck！
-我来试试数据集拼接的过程
-
-
-处理的代码在上面的tools 文件里
+对于下载好的文件进行批处理，用简单的命令行就可以进行：
+```python
+for d in TRAIN_{0..10}; do echo "处理 $d"; (cd "$d" && 7z x -y *.zip.001 -o"../extracted_$d"); done
+```
 
 2、 UAVDark 70：   https://pan.baidu.com/s/1PTFwNoSxwZBmUSzDD3ti2A    提取码：1234
 这个比较简单，也比较小 只有7.2G
