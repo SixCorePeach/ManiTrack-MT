@@ -9,6 +9,55 @@
 ```python
 for d in TRAIN_{0..10}; do echo "处理 $d"; (cd "$d" && 7z x -y *.zip.001 -o"../extracted_$d"); done
 ```
+在把它们都解压完之后，发现每个extracted_TRAIN_x 中有两个文件，anno和zips，这个zips里面全是zip,因此，给定bash程序 unzipall.bash
+```bash
+#!/bin/bash
+
+# 循环处理 extracted_TRAIN_0 到 extracted_TRAIN_10
+for i in {0..10}; do
+    dir="extracted_TRAIN_$i"
+    zips_dir="$dir/zips"
+    output_dir="$dir/zipdata"
+
+    # 检查 zips 目录是否存在
+    if [ ! -d "$zips_dir" ]; then
+        echo "警告: $zips_dir 不存在，跳过..."
+        continue
+    fi
+
+    # 创建 zipdata 目录（如果不存在）
+    mkdir -p "$output_dir"
+
+    # 遍历 zips 目录下的所有 .zip 文件
+    for zip_file in "$zips_dir"/*.zip; do
+        # 检查是否真的有 zip 文件（避免空匹配）
+        [ -f "$zip_file" ] || continue
+
+        # 获取 zip 文件名（不含路径）
+        filename=$(basename "$zip_file")
+        # 去掉 .zip 后缀，作为解压目录名
+        dirname="${filename%.zip}"
+
+        # 创建目标子目录
+        target_dir="$output_dir/$dirname"
+        mkdir -p "$target_dir"
+
+        # 解压到目标子目录
+        unzip -q "$zip_file" -d "$target_dir"
+
+        echo "已解压: $zip_file -> $target_dir"
+    done
+
+    echo "✅ $dir 处理完成"
+done
+echo "🎉 所有解压任务完成！"
+```
+然后 给这个文件赋予权限
+```
+chmod +x unzipall.bash
+bash unzipall.bash
+```
+等它执行完就ok
 
 2、 UAVDark 70：   https://pan.baidu.com/s/1PTFwNoSxwZBmUSzDD3ti2A    提取码：1234
 这个比较简单，也比较小 只有7.2G
