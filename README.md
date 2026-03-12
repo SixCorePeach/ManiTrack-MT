@@ -1,5 +1,5 @@
-# ManiTrack-MT
-This is the code of our work: ManiTrack-MT: Multi-Teacher Manifold Distillation for Robust Visual Tracking.
+# ManiTrack
+This is the code of our paper: name-waiting.
 We will open our project step by step.
 
 
@@ -121,11 +121,14 @@ JRDB2019
 
 
 
+在数据准备好之后，我们开展了充分的实验：
+
+
 
 
 Acknowledge
 
-首先致谢本文的基线模型，也是本工作影响最大的模型：UMDATrack 和 OmniTrack
+首先致谢本文的基线模型，也是本工作影响最大的模型：UMDATrack 和 OmniTrack, 以及DINOV2/3
 ```
 @inproceedings{yao2025umdatrack,
   title={UMDATrack: Unified Multi-Domain Adaptive Tracking Under Adverse Weather Conditions},
@@ -140,6 +143,7 @@ Acknowledge
   booktitle={IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
   year={2025}
 }
+
 ```
 Thanks
 https://github.com/tianweiy/CenterPoint/tree/d3a248fa56db2601860d576d5934d00fee9916eb
